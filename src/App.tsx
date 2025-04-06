@@ -1,8 +1,13 @@
+import { Route, Routes } from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+
 const App = () => {
   return (
-    <div className="bg-rose-200 p-4">
-      <h1 className="text-4xl text-cyan-800">Aplicacion de alfabeto</h1>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<MainLayout />}></Route>
+      </Routes>
+    </>
   );
 };
 
