@@ -5,7 +5,9 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<MainLayout />}></Route>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="vocales" element={<div>Ruta en construccion</div>} />
+        </Route>
       </Routes>
     </>
   );
