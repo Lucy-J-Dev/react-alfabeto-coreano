@@ -1,17 +1,9 @@
-import { IconType } from "react-icons";
+import { ChildrenProps } from "../../utils/types";
 
-type CardHeaderProps = {
-  title: string;
-  icon: IconType;
-};
+type CardHeaderProps = ChildrenProps & {};
 
-const CardHeader = ({ title, icon: Icon }: CardHeaderProps) => {
-  return (
-    <div className="flex items-center justify-between p-6">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <Icon className="h-6 w-6" />
-    </div>
-  );
+const CardHeader = ({ children }: CardHeaderProps) => {
+  return <div className="flex items-center justify-between p-6 pb-0">{children}</div>;
 };
 
 export default CardHeader;

@@ -22,7 +22,7 @@ interface Link {
 const links: Link[] = [
   { id: 1, to: "/", icon: MdOutlineDashboardCustomize, label: "Dashboard" },
   { id: 2, to: "/caracteres", icon: MdOutlineDashboardCustomize, label: "Caracteres" },
-  { id: 3, to: "/caracteres/crear", icon: MdOutlineDashboardCustomize, label: "Agregar nuevo caracter" },
+  { id: 3, to: "/caracteres/nuevo", icon: MdOutlineDashboardCustomize, label: "Agregar nuevo caracter" },
   { id: 4, to: "/media", icon: MdOutlineDashboardCustomize, label: "Imagenes" },
   { id: 5, to: "/audio", icon: MdOutlineDashboardCustomize, label: "Audio" },
 ];
@@ -43,7 +43,7 @@ const Sidebar = ({ open, onSidebarOpen }: SidebarProps) => {
           <div className="border-b flex items-center px-4 py-4">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <GiSpellBook className="h-6 w-6" />
-              <span className="text-md">Alfabeto Coreano</span>
+              <h1 className="text-md">Alfabeto Coreano</h1>
             </Link>
             <button
               className="ml-auto cursor-pointer flex items-center justify-center bg-white p-2 rounded-full shadow-md hover:shadow-xl transition-all duration-300 ease-in-out  hover:scale-105 active:scale-90"
