@@ -34,7 +34,7 @@ const CharacterDetail = () => {
       <div className="px-6">Pagina en construcción</div>
 
       {/* Contenido */}
-      <div className="flex flex-col bg-pink-200 px-6 gap-6 md:flex-row">
+      <div className="flex flex-col px-6 gap-6 md:flex-row">
         <Card>
           <CardHeader>
             <CardTitle>Información del caracter</CardTitle>
@@ -74,7 +74,34 @@ const CharacterDetail = () => {
             </div>
           </CardContent>
         </Card>
-        <Card>Hola</Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Imagen del caracter </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-center p-4">
+              <div className="flex h-48 w-48 items-center justify-center border-2 rounded-2xl border-muted-forground bg-muted">
+                <span className="text-accent text-[130px] font-bold">{characterDetailData.char}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Audios */}
+      <div className="px-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Audios</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="border-2 rounded-lg p-3">
+              <p>audio</p>
+              <p>audio</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
