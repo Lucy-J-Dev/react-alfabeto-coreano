@@ -28,6 +28,16 @@ const characterDetailData: CharacterItemDetail = {
   nameRomaji: "Giyeok",
 };
 
+type AudiosFiles =  { 
+    id: number; 
+    name: string; 
+    type: string; 
+    duration: string; 
+    url: string 
+  };
+
+
+
 const CharacterDetail = () => {
   return (
     <div className=" bg-background flex flex-col gap-6 py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
