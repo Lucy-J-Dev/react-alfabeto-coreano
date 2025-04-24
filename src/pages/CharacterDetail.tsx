@@ -2,6 +2,7 @@ import Card from "../components/card/Card";
 import CardContent from "../components/card/CardContent";
 import CardHeader from "../components/card/CardHeader";
 import CardTitle from "../components/card/CardTitle";
+import { LuFileAudio } from "react-icons/lu";
 
 type CharacterItemDetail = {
   id: number;
@@ -97,8 +98,15 @@ const CharacterDetail = () => {
           </CardHeader>
           <CardContent>
             <div className="border-2 rounded-lg p-3">
-              <p>audio</p>
-              <p>audio</p>
+              <div className="border-2 flex">
+                <LuFileAudio />
+                <p>audio</p>
+                <span></span>
+              </div>
+              <div className="border-2 flex">
+                <LuFileAudio />
+                <p>audio</p>
+              </div>
             </div>
           </CardContent>
         </Card>

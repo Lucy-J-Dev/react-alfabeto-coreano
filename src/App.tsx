@@ -3,6 +3,7 @@ import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Characters from "./pages/Characters";
 import CharacterDetail from "./pages/CharacterDetail";
+import AddCharacter from "./pages/AddCharacter";
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
           <Route index element={<Dashboard />} />
           <Route path="/caracteres" element={<Characters />} />
           <Route path="/caracteres/:id" element={<CharacterDetail />} />
-          <Route path="/caracteres/nuevo" element={<div>crear nuevo caracter</div>} />
+          <Route path="/caracteres/nuevo" element={<AddCharacter />} />
         </Route>
       </Routes>
     </>

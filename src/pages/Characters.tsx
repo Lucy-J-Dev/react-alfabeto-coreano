@@ -27,7 +27,7 @@ const charactersData: CharacterItem[] = [
 
 const Characters = () => {
   return (
-    <div className="bg-background flex flex-col gap-6  py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
+    <div className="bg-background flex flex-col gap-6 py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
       {/* Encabezado */}
       <div className="flex flex-col px-6">
         <h2 className="text-3xl font-bold tracking-tight">Caracteres</h2>
