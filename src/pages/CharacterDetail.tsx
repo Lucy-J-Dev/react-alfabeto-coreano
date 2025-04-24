@@ -105,7 +105,7 @@ const CharacterDetail = () => {
               <div className='flex flex-row gap-2'>
                
                 <span>Type: Pronunciación</span>
-                <span>Duración: 1:00 min</span>
+                <span>Duración: 1:00 min.</span>
               </div>    
               <div>
                 
