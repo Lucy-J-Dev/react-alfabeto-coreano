@@ -97,16 +97,19 @@ const CharacterDetail = () => {
             <CardTitle>Audios</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="border-2 rounded-lg p-3">
-              <div className="border-2 flex">
-                <LuFileAudio />
-                <p>audio</p>
-                <span></span>
-              </div>
-              <div className="border-2 flex">
-                <LuFileAudio />
-                <p>audio</p>
-              </div>
+            <div className="flex flex-col rounded-lg p-3 border-2">
+              <div className='flex flex-row gap-2 items-center'>
+                <LuFileAudio />  
+                <p>audio</p>            
+              </div> 
+              <div className='flex flex-row gap-2'>
+               
+                <span>Type: Pronunciación</span>
+                <span>Duración: 1:00 min</span>
+              </div>    
+              <div>
+                
+              </div>         
             </div>
           </CardContent>
         </Card>
