@@ -28,15 +28,13 @@ const characterDetailData: CharacterItemDetail = {
   nameRomaji: "Giyeok",
 };
 
-type AudiosFiles =  { 
-    id: number; 
-    name: string; 
-    type: string; 
-    duration: string; 
-    url: string 
-  };
-
-
+type AudiosFiles = {
+  id: number;
+  name: string;
+  type: string;
+  duration: string;
+  url: string;
+};
 
 const CharacterDetail = () => {
   return (
@@ -108,18 +106,15 @@ const CharacterDetail = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col rounded-lg p-3 border-2">
-              <div className='flex flex-row gap-2 items-center'>
+              <div className="flex flex-row gap-2 items-center">
                 <LuFileAudio />
                 <p>audio</p>
               </div>
-              <div className='flex flex-row gap-2'>
-
+              <div className="flex flex-row gap-2">
                 <span>Type: Pronunciación</span>
                 <span>Duración: 1:00 min </span>
               </div>
-              <div>
-
-              </div>
+              <div></div>
             </div>
           </CardContent>
         </Card>
