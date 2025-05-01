@@ -1,17 +1,19 @@
 type FloatingLabelInputProps = {
   id: string;
+  name: string;
   label: string;
   type?: string;
-  value: string;
-  onChange: () => void;
+  value?: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const FloatingLabelInput = ({ id, label, type = "text", value, onChange }: FloatingLabelInputProps) => {
+const FloatingLabelInput = ({ id, name, label, type = "text", value = "", onChange }: FloatingLabelInputProps) => {
   return (
     <div className="relative">
       <input
         className="peer h-12 w-full border-b-2 border-primary text-foreground placeholder-transparent focus:outline-none  focus:border-accent pt-2.5"
         id={id}
+        name={name}
         type={type}
         value={value}
         onChange={onChange}
