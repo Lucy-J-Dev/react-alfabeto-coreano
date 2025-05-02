@@ -47,20 +47,37 @@ const AddCharacter = () => {
     const newErrors: FormErrors = {};
 
     if (!formData.char.trim()) newErrors.char = "El caracter es obligatorio";
+    else if (formData.char.length >= 1) newErrors.char = "Solo se permite 1 carácter.";
 
     // if (!formData.caracter.trim()) newErrors.caracter = "El carácter es obligatorio.";
     // else if (formData.caracter.length > 1) newErrors.caracter = "Solo se permite 1 carácter.";
+
+    if (!formData.type.trim()) newErrors.type = "El tipo de caracter es obligatorio.";
+    else if (formData.type.length > 1) newErrors.type = "El tipo de caracter debe tener al menos 1 caracteres.";
+    else if (formData.type.length < 20) newErrors.type = "El tipo de caracter debe tener máximo 20 caracteres.";
 
     // if (!formData.nombre.trim()) newErrors.nombre = "El nombre es obligatorio.";
     // else if (formData.nombre.length < 2) newErrors.nombre = "El nombre debe tener al menos 2 caracteres.";
     // else if (formData.nombre.length > 50) newErrors.nombre = "Máximo 50 caracteres.";
 
+    if (!formData.pronuntiation.trim()) newErrors.pronuntiation = "La pronunciación del caracter es obligatorio.";
+    else if (formData.pronuntiation.length > 1)
+      newErrors.pronuntiation = "La pronunciación del caracter debe tener al menos 1 caracteres.";
+    else if (formData.pronuntiation.length < 40)
+      newErrors.pronuntiation = "La pronunciación del caracter debe tener máximo 40 caracteres.";
+
     // if (!formData.pronunciacion.trim()) newErrors.pronunciacion = "La pronunciación es obligatoria.";
+
+    if (!formData.charRomaji.trim()) newErrors.charRomaji = "El caracter en alfabeto latino es obligatorio.";
+    else if (formData.charRomaji.length > 1)
+      newErrors.charRomaji = "El caracter en alfabeto latino debe tener al menos 1 caracteres.";
+    else if (formData.charRomaji.length < 2)
+      newErrors.charRomaji = "El caracter en alfabeto latino debe tener máximo 2 caracteres.";
 
     // if (formData.descripcion.length > 100)
     //   newErrors.descripcion = "La descripción debe tener máximo 100 caracteres.";
 
-    // return newErrors;
+    return newErrors;
   };
 
   return (
