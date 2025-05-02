@@ -90,7 +90,7 @@ const CharacterDetail = () => {
           </CardHeader>
           <CardContent>
             <div className="flex justify-center p-4">
-              <div className="flex h-48 w-48 items-center justify-center border-2 rounded-2xl border-muted-forground bg-muted">
+              <div className="flex h-48 w-48 items-center justify-center border-2 rounded-2xl border-muted-foreground bg-muted">
                 <span className="text-accent text-[130px] font-bold">{characterDetailData.char}</span>
               </div>
             </div>
@@ -106,15 +106,14 @@ const CharacterDetail = () => {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col rounded-lg p-3 border-2">
-              <div className='flex flex-col gap-2'>
-                <div className='flex flex-row gap-2 items-center'>
-               <LuFileAudio className="w-8 h-8 bg-amber-300 "/>
-                <p>Audio 1</p> 
-                
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-row gap-2 items-center">
+                  <LuFileAudio className="w-8 h-8 bg-amber-300 " />
+                  <p>Audio 1</p>
                 </div>
-                <div className='flex flex-row gap-4 ml-8 text-sm'>                   
-                <span>Type: Pronunciación</span>
-                <span>Duración: 1:00 min </span>
+                <div className="flex flex-row gap-4 ml-8 text-sm">
+                  <span>Type: Pronunciación</span>
+                  <span>Duración: 1:00 min </span>
                 </div>
               </div>
             </div>

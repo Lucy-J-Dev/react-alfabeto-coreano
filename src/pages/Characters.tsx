@@ -31,7 +31,7 @@ const Characters = () => {
       {/* Encabezado */}
       <div className="flex flex-col px-6">
         <h2 className="text-3xl font-bold tracking-tight">Caracteres</h2>
-        <p className="text-muted-forground">Busca y manipula los caracteres del alfabeto Coreano</p>
+        <p className="text-muted-foreground">Busca y manipula los caracteres del alfabeto Coreano</p>
       </div>
 
       {/* Sección de buscar y boton crear */}
@@ -71,7 +71,7 @@ const Characters = () => {
               </CardHeader>
               <CardContent>
                 <p className="font-semibold">{character.name}</p>
-                <p className="italic text-muted-forground">{character.desc}</p>
+                <p className="italic text-muted-foreground">{character.desc}</p>
               </CardContent>
             </Card>
           </Link>

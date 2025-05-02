@@ -34,7 +34,7 @@ const Dashboard = () => {
       {/* Encabezado */}
       <div className="flex flex-col gap-2 p-6 ">
         <h2 className="text-3xl font-bold tracking-tight">Alfabeto Coreano</h2>
-        <p className="text-muted-forground">... colocar algo ...</p>
+        <p className="text-muted-foreground">... colocar algo ...</p>
       </div>
 
       {/* Contenido */}
@@ -51,7 +51,7 @@ const Dashboard = () => {
               <div>
                 <p className="text-4xl font-semibold text-accent">{item.count}</p>
               </div>
-              <p className="text-base text-muted-forground">{item.desc}</p>
+              <p className="text-base text-muted-foreground">{item.desc}</p>
             </CardContent>
           </Card>
         ))}
