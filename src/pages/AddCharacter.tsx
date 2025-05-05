@@ -39,6 +39,12 @@ const AddCharacter = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const validationErrors = validate(formData);
+    console.log(validationErrors);
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
     console.log("Datos del caracter:", formData);
   };
@@ -47,7 +53,7 @@ const AddCharacter = () => {
     const newErrors: FormErrors = {};
 
     if (!formData.char.trim()) newErrors.char = "El caracter es obligatorio";
-    else if (formData.char.length >= 1) newErrors.char = "Solo se permite 1 carácter.";
+    else if (formData.char.length > 1) newErrors.char = "Solo se permite 1 carácter.";
 
     // if (!formData.caracter.trim()) newErrors.caracter = "El carácter es obligatorio.";
     // else if (formData.caracter.length > 1) newErrors.caracter = "Solo se permite 1 carácter.";
@@ -69,10 +75,8 @@ const AddCharacter = () => {
     // if (!formData.pronunciacion.trim()) newErrors.pronunciacion = "La pronunciación es obligatoria.";
 
     if (!formData.charRomaji.trim()) newErrors.charRomaji = "El caracter en alfabeto latino es obligatorio.";
-    else if (formData.charRomaji.length > 1)
-      newErrors.charRomaji = "El caracter en alfabeto latino debe tener al menos 1 caracteres.";
-    else if (formData.charRomaji.length < 2)
-      newErrors.charRomaji = "El caracter en alfabeto latino debe tener máximo 2 caracteres.";
+    else if (formData.charRomaji.length < 1 || formData.charRomaji.length > 2)
+      newErrors.charRomaji = "El caracter en alfabeto latino debe tener al menos 2 caracteres.";
 
     // if (formData.descripcion.length > 100)
     //   newErrors.descripcion = "La descripción debe tener máximo 100 caracteres.";
@@ -93,10 +97,9 @@ const AddCharacter = () => {
           <FloatingLabelInput
             id="char"
             name="char"
-            label="Caracter"
+            label="* Caracter"
             value={formData.char}
             onChange={handleChange}
-            required
             minLength={1}
             maxLength={1}
             error={errors.char}
@@ -124,10 +127,9 @@ const AddCharacter = () => {
           <FloatingLabelInput
             id="type"
             name="type"
-            label="Tipo de caracter"
+            label="* Tipo de caracter"
             value={formData.type}
             onChange={handleChange}
-            required
             minLength={1}
             maxLength={20}
             error={errors.type}
@@ -145,10 +147,9 @@ const AddCharacter = () => {
           <FloatingLabelInput
             id="pronuntiation"
             name="pronuntiation"
-            label="Pronunciación del caracter"
+            label="* Pronunciación del caracter"
             value={formData.pronuntiation}
             onChange={handleChange}
-            required
             minLength={1}
             maxLength={10}
             error={errors.pronuntiation}
@@ -156,10 +157,9 @@ const AddCharacter = () => {
           <FloatingLabelInput
             id="charRomaji"
             name="charRomaji"
-            label="Caracter en alfabeto latino"
+            label="* Caracter en alfabeto latino"
             value={formData.charRomaji}
             onChange={handleChange}
-            required
             minLength={1}
             maxLength={2}
             error={errors.charRomaji}

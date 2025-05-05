@@ -5,7 +5,6 @@ type FloatingLabelInputProps = {
   type?: string;
   value?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  required?: boolean;
   minLength?: number;
   maxLength?: number;
   error?: string;
@@ -18,7 +17,6 @@ const FloatingLabelInput = ({
   type = "text",
   value = "",
   onChange,
-  required,
   minLength,
   maxLength,
   error,
@@ -35,7 +33,6 @@ const FloatingLabelInput = ({
         value={value}
         onChange={onChange}
         placeholder=" "
-        required={required}
         minLength={minLength}
         maxLength={maxLength}
       />
