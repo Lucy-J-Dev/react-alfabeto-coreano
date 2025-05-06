@@ -150,7 +150,15 @@ const AddCharacter = () => {
             maxLength={2}
             error={errors.charRomaji}
           />
-          <button type="submit">Guardar</button>
+
+          <div className=" flex justify-end align-center mt-4">
+            <button
+              className="bg-primary text-forground px-6 py-2 mt-4 rounded-md shadow-md hover:shadow-xl hover:scale-105 hover:font-semibold active:scale-95 transition-all duration-300 ease-in-out"
+              type="submit"
+            >
+              Guardar
+            </button>
+          </div>
         </form>
       </div>
     </div>
