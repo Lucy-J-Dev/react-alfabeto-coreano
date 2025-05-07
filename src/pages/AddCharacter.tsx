@@ -24,7 +24,6 @@ type FormErrors = {
 
 const AddCharacter = () => {
   const [formData, setFomrData] = useState(characterInitialValue);
-
   const [errors, setErrors] = useState<FormErrors>({});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -151,9 +150,9 @@ const AddCharacter = () => {
             error={errors.charRomaji}
           />
 
-          <div className=" flex justify-end align-center mt-4">
+          <div className=" flex justify-end align-center mt-8">
             <button
-              className="bg-primary text-forground px-6 py-2 mt-4 rounded-md shadow-md hover:shadow-xl hover:scale-105 hover:font-semibold active:scale-95 transition-all duration-300 ease-in-out"
+              className="bg-primary text-forground px-6 py-2 rounded-md shadow-md hover:shadow-xl hover:scale-105 hover:font-semibold active:scale-95 transition-all duration-300 ease-in-out"
               type="submit"
             >
               Guardar
