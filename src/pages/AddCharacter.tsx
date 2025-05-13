@@ -1,6 +1,8 @@
+// Imports
 import { useState } from "react";
 import FloatingLabelInput from "../components/ui/FloatingLabelInput";
 
+// Tipos y constantes
 type CharacterForm = {
   char: string;
   name?: string;
@@ -11,6 +13,10 @@ type CharacterForm = {
   nameRomaji?: string;
 };
 
+type FormErrors = {
+  [key: string]: string;
+};
+
 const characterInitialValue: CharacterForm = {
   char: "",
   charRomaji: "",
@@ -18,14 +24,15 @@ const characterInitialValue: CharacterForm = {
   type: "",
 };
 
-type FormErrors = {
-  [key: string]: string;
-};
-
+// Componente
 const AddCharacter = () => {
+  // Estados
   const [formData, setFomrData] = useState(characterInitialValue);
   const [errors, setErrors] = useState<FormErrors>({});
 
+  // Effectos
+
+  // Funciones
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFomrData((prev) => ({
@@ -37,7 +44,9 @@ const AddCharacter = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const validationErrors = validate(formData);
+
     console.log(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) {
@@ -46,6 +55,10 @@ const AddCharacter = () => {
     }
 
     console.log("Datos del caracter:", formData);
+
+    // LLamar al API con la data capturada que ya sabemos que es correcta
+    const resultadoDeLlamarApi = funcionLlamarApi(formData);
+    
   };
 
   const validate = (formData: CharacterForm) => {
@@ -69,6 +82,7 @@ const AddCharacter = () => {
     return newErrors;
   };
 
+  // Vista o HTML con JS de react
   return (
     <div className="bg-background flex flex-col gap-6 py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
       {/* Encabezado */}
