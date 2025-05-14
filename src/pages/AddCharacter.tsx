@@ -47,8 +47,6 @@ const AddCharacter = () => {
 
     const validationErrors = validate(formData);
 
-    console.log(validationErrors);
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -57,8 +55,15 @@ const AddCharacter = () => {
     console.log("Datos del caracter:", formData);
 
     // LLamar al API con la data capturada que ya sabemos que es correcta
-    const resultadoDeLlamarApi = funcionLlamarApi(formData);
-    
+    // voy a ejecutar una funcion que esta creada en otro lado con la siguiente data
+  };
+
+  const handleCallApi = (formData: CharacterForm) => {};
+
+  const createCharacter = async (formData: CharacterForm) => {
+    const response = await fetch("ACORDARSE DE PONER AQUI LA URL DEL API", {});
+    const result = await response.json();
+    return result;
   };
 
   const validate = (formData: CharacterForm) => {
