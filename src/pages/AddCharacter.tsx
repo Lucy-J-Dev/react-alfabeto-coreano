@@ -51,17 +51,44 @@ const AddCharacter = () => {
       setErrors(validationErrors);
       return;
     }
-
     console.log("Datos del caracter:", formData);
+    handleCallApi(formData);
 
     // LLamar al API con la data capturada que ya sabemos que es correcta
     // voy a ejecutar una funcion que esta creada en otro lado con la siguiente data
   };
 
-  const handleCallApi = (formData: CharacterForm) => {};
+  const handleCallApi = (formData: CharacterForm) => {
+    // Establecer el cargando en verdadero
+    createCharacter(formData)
+      .then((result) => {
+        // Setear un mensaje de exito (useState)
+        // Borrar todo el formulario
+        // Borrar los errores
+
+        console.log(result);
+      })
+      .catch((error) => {
+        // Setear un mensaje de error (useState)
+        console.log(error);
+      });
+    // .finally() setear el cargando en falso
+  };
 
   const createCharacter = async (formData: CharacterForm) => {
-    const response = await fetch("ACORDARSE DE PONER AQUI LA URL DEL API", {});
+    const response = await fetch("https://localhost:7013/api/v1/jamos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        character: formData.char,
+        type: formData.type,
+        pronunciation: formData.pronuntiation,
+        characterRomaji: formData.charRomaji,
+        name: formData.name,
+        nameRomaji: formData.nameRomaji,
+        description: formData.desc,
+      }),
+    });
     const result = await response.json();
     return result;
   };
