@@ -27,15 +27,17 @@ const characterInitialValue: CharacterForm = {
 // Componente
 const AddCharacter = () => {
   // Estados
-  const [formData, setFomrData] = useState(characterInitialValue);
+  const [formData, setFormData] = useState(characterInitialValue);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [message, setMessage] = useState("");
+  const [messageError, setMessageError] = useState("");
 
   // Effectos
 
   // Funciones
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setFomrData((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -62,21 +64,25 @@ const AddCharacter = () => {
     // Establecer el cargando en verdadero
     createCharacter(formData)
       .then((result) => {
-        // Setear un mensaje de exito (useState)
+        setMessage("Su caracter fue creado");
+        setMessageError("");
+
         // Borrar todo el formulario
         // Borrar los errores
 
-        console.log(result);
+        console.log("caracter creado en then", result);
       })
       .catch((error) => {
-        // Setear un mensaje de error (useState)
-        console.log(error);
+        setMessageError("Su caracter no fue creado");
+        setMessage("");
+
+        console.log("Estoy en catch", error);
       });
     // .finally() setear el cargando en falso
   };
 
   const createCharacter = async (formData: CharacterForm) => {
-    const response = await fetch("https://localhost:7013/api/v1/jamos", {
+    const response = await fetch("http://localhost:5000/api/v1/jamos", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -90,6 +96,8 @@ const AddCharacter = () => {
       }),
     });
     const result = await response.json();
+    console.log("resultado del API", response);
+
     return result;
   };
 
@@ -118,9 +126,15 @@ const AddCharacter = () => {
   return (
     <div className="bg-background flex flex-col gap-6 py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
       {/* Encabezado */}
-      <div className="flex flex-col px-6">
-        <h2 className="text-3xl font-bold tracking-tight">Crear caracter</h2>
-        <p className="text-muted-foreground">Ingresar la Información</p>
+      <div className="flex flex-row">
+        <div className="flex flex-col  flex-1 px-6">
+          <h2 className="text-3xl font-bold tracking-tight">Crear caracter</h2>
+          <p className="text-muted-foreground">Ingresar la Información</p>
+        </div>
+        <div className="flex flex-1">
+          {message && <p className="text-green-400 text-4xl">{message}</p>}
+          {messageError && <p className="text-red-500 text-4xl">{messageError}</p>}
+        </div>
       </div>
       {/* Formulario */}
       <div className="px-6">
