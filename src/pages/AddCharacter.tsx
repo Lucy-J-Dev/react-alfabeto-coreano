@@ -31,6 +31,7 @@ const AddCharacter = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Effectos
 
@@ -60,45 +61,48 @@ const AddCharacter = () => {
     // voy a ejecutar una funcion que esta creada en otro lado con la siguiente data
   };
 
-  const handleCallApi = (formData: CharacterForm) => {
-    // Establecer el cargando en verdadero
-    createCharacter(formData)
-      .then((result) => {
-        setMessage("Su caracter fue creado");
-        setMessageError("");
+  const handleCallApi = async (formData: CharacterForm) => {
+    setLoading(true);
+    setMessageError("");
+    setMessage("");
 
-        // Borrar todo el formulario
-        // Borrar los errores
-
-        console.log("caracter creado en then", result);
-      })
-      .catch((error) => {
-        setMessageError("Su caracter no fue creado");
-        setMessage("");
-
-        console.log("Estoy en catch", error);
-      });
-    // .finally() setear el cargando en falso
+    try {
+      const response = await createCharacter(formData);
+      setMessage("Su caracter fue creado");
+      setFormData(characterInitialValue);
+      // Borrar todo el formulario
+    } catch (error) {
+      console.log(error);
+      setMessageError("Su caracter no fue creado");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const createCharacter = async (formData: CharacterForm) => {
-    const response = await fetch("http://localhost:5000/api/v1/jamos", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        character: formData.char,
-        type: formData.type,
-        pronunciation: formData.pronuntiation,
-        characterRomaji: formData.charRomaji,
-        name: formData.name,
-        nameRomaji: formData.nameRomaji,
-        description: formData.desc,
-      }),
-    });
-    const result = await response.json();
-    console.log("resultado del API", response);
-
-    return result;
+    try {
+      const response = await fetch("http://localhost:5000/api/v1/jamos", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          character: formData.char,
+          type: formData.type,
+          pronunciation: formData.pronuntiation,
+          characterRomaji: formData.charRomaji,
+          name: formData.name,
+          nameRomaji: formData.nameRomaji,
+          description: formData.desc,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message || `Error ${response.status}: ${response.statusText}`);
+      }
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
 
   const validate = (formData: CharacterForm) => {
