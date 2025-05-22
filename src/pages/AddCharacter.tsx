@@ -45,7 +45,7 @@ const AddCharacter = () => {
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const validationErrors = validate(formData);
@@ -55,10 +55,7 @@ const AddCharacter = () => {
       return;
     }
     console.log("Datos del caracter:", formData);
-    handleCallApi(formData);
-
-    // LLamar al API con la data capturada que ya sabemos que es correcta
-    // voy a ejecutar una funcion que esta creada en otro lado con la siguiente data
+    await handleCallApi(formData);
   };
 
   const handleCallApi = async (formData: CharacterForm) => {
@@ -68,9 +65,8 @@ const AddCharacter = () => {
 
     try {
       const response = await createCharacter(formData);
-      setMessage("Su caracter fue creado");
+      setMessage("Su caracter formData.char fue creado con el id: response.id");
       setFormData(characterInitialValue);
-      // Borrar todo el formulario
     } catch (error) {
       console.log(error);
       setMessageError("Su caracter no fue creado");
@@ -95,6 +91,7 @@ const AddCharacter = () => {
         }),
       });
       const result = await response.json();
+      console.log("Api: ", result);
       if (!response.ok) {
         throw new Error(result.message || `Error ${response.status}: ${response.statusText}`);
       }
