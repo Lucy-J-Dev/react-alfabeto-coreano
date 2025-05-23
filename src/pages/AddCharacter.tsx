@@ -1,21 +1,9 @@
 // Imports
 import { useState } from "react";
 import FloatingLabelInput from "../components/ui/FloatingLabelInput";
-
-// Tipos y constantes
-type CharacterForm = {
-  char: string;
-  name?: string;
-  type: string;
-  desc?: string;
-  pronuntiation: string;
-  charRomaji: string;
-  nameRomaji?: string;
-};
-
-type FormErrors = {
-  [key: string]: string;
-};
+import { CharacterForm, FormErrors } from "../utils/types";
+import { createCharacter } from "../services/api";
+import { validate } from "../utils/helpers";
 
 const characterInitialValue: CharacterForm = {
   char: "",
@@ -65,62 +53,14 @@ const AddCharacter = () => {
 
     try {
       const response = await createCharacter(formData);
-      setMessage("Su caracter formData.char fue creado con el id: response.id");
+      setMessage(`Su caracter ${formData.char} fue creado con el id: ${response.id}`);
       setFormData(characterInitialValue);
     } catch (error) {
       console.log(error);
-      setMessageError("Su caracter no fue creado");
+      setMessageError(`Su caracter no fue creado ${error.message}`);
     } finally {
       setLoading(false);
     }
-  };
-
-  const createCharacter = async (formData: CharacterForm) => {
-    try {
-      const response = await fetch("http://localhost:5000/api/v1/jamos", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          character: formData.char,
-          type: formData.type,
-          pronunciation: formData.pronuntiation,
-          characterRomaji: formData.charRomaji,
-          name: formData.name,
-          nameRomaji: formData.nameRomaji,
-          description: formData.desc,
-        }),
-      });
-      const result = await response.json();
-      console.log("Api: ", result);
-      if (!response.ok) {
-        throw new Error(result.message || `Error ${response.status}: ${response.statusText}`);
-      }
-      return result;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
-
-  const validate = (formData: CharacterForm) => {
-    const newErrors: FormErrors = {};
-
-    if (!formData.char.trim()) newErrors.char = "El caracter es obligatorio";
-    else if (formData.char.length > 1) newErrors.char = "Solo se permite 1 carácter.";
-
-    if (!formData.type.trim()) newErrors.type = "El tipo de caracter es obligatorio.";
-    else if (formData.type.length < 1 || formData.type.length > 20)
-      newErrors.type = "El tipo de caracter debe tener máximo 20 caracteres.";
-
-    if (!formData.pronuntiation.trim()) newErrors.pronuntiation = "La pronunciación del caracter es obligatorio.";
-    else if (formData.pronuntiation.length < 1 || formData.pronuntiation.length > 40)
-      newErrors.pronuntiation = "La pronunciación del caracter debe tener máximo 40 caracteres.";
-
-    if (!formData.charRomaji.trim()) newErrors.charRomaji = "El caracter en alfabeto latino es obligatorio.";
-    else if (formData.charRomaji.length < 1 || formData.charRomaji.length > 2)
-      newErrors.charRomaji = "El caracter en alfabeto latino debe tener al menos 2 caracteres.";
-
-    return newErrors;
   };
 
   // Vista o HTML con JS de react
@@ -132,9 +72,9 @@ const AddCharacter = () => {
           <h2 className="text-3xl font-bold tracking-tight">Crear caracter</h2>
           <p className="text-muted-foreground">Ingresar la Información</p>
         </div>
-        <div className="flex flex-1">
-          {message && <p className="text-green-400 text-4xl">{message}</p>}
-          {messageError && <p className="text-red-500 text-4xl">{messageError}</p>}
+        <div className="flex flex-2">
+          {message && <p className="text-green-400 text-2xl">{message}</p>}
+          {messageError && <p className="text-red-500 text-2xl">{messageError}</p>}
         </div>
       </div>
       {/* Formulario */}
@@ -213,10 +153,11 @@ const AddCharacter = () => {
 
           <div className=" flex justify-end align-center mt-8">
             <button
-              className="bg-primary text-forground px-6 py-2 rounded-md shadow-md hover:shadow-xl hover:scale-105 hover:font-semibold active:scale-95 transition-all duration-300 ease-in-out"
+              className="bg-primary text-forground px-6 py-2 rounded-md shadow-md hover:shadow-xl hover:scale-105 hover:font-semibold active:scale-95 transition-all duration-300 ease-in-out cursor-pointer"
+              disabled={loading}
               type="submit"
             >
-              Guardar
+              {loading ? "Cargando..." : "Guardar"}
             </button>
           </div>
         </form>
