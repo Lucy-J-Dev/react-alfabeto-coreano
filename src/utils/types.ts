@@ -15,3 +15,8 @@ export type CharacterForm = {
 export type FormErrors = {
   [key: string]: string;
 };
+
+export type CharacterType = {
+  name: string;
+  displayname: string;
+};

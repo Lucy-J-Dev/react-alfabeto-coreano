@@ -1,8 +1,8 @@
 // Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FloatingLabelInput from "../components/ui/FloatingLabelInput";
-import { CharacterForm, FormErrors } from "../utils/types";
-import { createCharacter } from "../services/api";
+import { CharacterForm, CharacterType, FormErrors } from "../utils/types";
+import { createCharacter, getCharacterTypes } from "../services/api";
 import { validate } from "../utils/helpers";
 
 const characterInitialValue: CharacterForm = {
@@ -20,8 +20,24 @@ const AddCharacter = () => {
   const [message, setMessage] = useState("");
   const [messageError, setMessageError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [characterTypes, setCharacterTypes] = useState<CharacterType[]>([]);
 
   // Effectos
+  useEffect(() => {
+    setLoading(true);
+    const handleCallGetCharacterTypesApi = async () => {
+      try {
+        const data = await getCharacterTypes();
+        setCharacterTypes(data);
+        console.log(data);
+      } catch (error) {
+        setMessageError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    handleCallGetCharacterTypesApi();
+  }, []);
 
   // Funciones
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,16 +126,19 @@ const AddCharacter = () => {
             maxLength={10}
             error={errors.nameRomaji}
           />
-          <FloatingLabelInput
-            id="type"
-            name="type"
-            label="* Tipo de caracter"
-            value={formData.type}
-            onChange={handleChange}
-            minLength={1}
-            maxLength={20}
-            error={errors.type}
-          />
+          {/* aqui poner el select para el tipo */}
+          <div>
+            <label htmlFor="type">
+              <select name="type" id="type">
+                <option value="">Seleccione un tipo</option>
+                {characterTypes.map((type) => (
+                  <option key={type.name} value={type.name}>
+                    {type.displayname}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
           <FloatingLabelInput
             id="desc"
             name="desc"
