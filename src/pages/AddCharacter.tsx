@@ -40,7 +40,7 @@ const AddCharacter = () => {
   }, []);
 
   // Funciones
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
@@ -129,7 +129,7 @@ const AddCharacter = () => {
           {/* aqui poner el select para el tipo */}
           <div>
             <label htmlFor="type">
-              <select name="type" id="type">
+              <select name="type" id="type" value={formData.type} onChange={handleChange}>
                 <option value="">Seleccione un tipo</option>
                 {characterTypes.map((type) => (
                   <option key={type.name} value={type.name}>
@@ -138,6 +138,7 @@ const AddCharacter = () => {
                 ))}
               </select>
             </label>
+            {errors.type && <p className="text-error text-sm mt-1">{errors.type}</p>}
           </div>
           <FloatingLabelInput
             id="desc"
