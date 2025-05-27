@@ -46,3 +46,16 @@ export const getCharacterTypes = async () => {
     throw new Error("No fue posible obtener los tipos");
   }
 };
+
+export const getSummary = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/api/v1/general/summary");
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error("");
+    }
+    return result;
+  } catch (error) {
+    throw new Error("No fue posible obtener resumenes");
+  }
+};
