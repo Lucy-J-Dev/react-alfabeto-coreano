@@ -20,3 +20,21 @@ export type CharacterType = {
   name: string;
   displayname: string;
 };
+
+// export type DashboardItem = {
+//   title: string;
+//   count: number;
+//   desc: string;
+// };
+
+export type Summary = {
+  title: string;
+  summary: string;
+  content: Content[];
+};
+
+export type Content = {
+  title: string;
+  count: number;
+  description: string;
+};
