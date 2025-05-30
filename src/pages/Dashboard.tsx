@@ -6,8 +6,6 @@ import CardTitle from "../components/card/CardTitle";
 import { useEffect, useState } from "react";
 import { getSummary } from "../services/api";
 import { Summary } from "../utils/types";
-// import { DashboardItem } from "../utils/types";
-import { Content } from "../utils/types";
 
 const Dashboard = () => {
   const [dataSummary, setDataSummary] = useState<Summary>({ title: "", summary: "", content: [] });

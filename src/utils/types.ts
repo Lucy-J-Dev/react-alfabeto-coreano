@@ -12,6 +12,18 @@ export type CharacterForm = {
   nameRomaji?: string;
 };
 
+export type CharacterItem = {
+  id: string;
+  character: string;
+  type: string;
+  pronunciation: string;
+  characterRomaji: string;
+  name: string;
+  nameRomaji: string;
+  description?: string;
+  imageUrl: string;
+};
+
 export type FormErrors = {
   [key: string]: string;
 };
@@ -20,12 +32,6 @@ export type CharacterType = {
   name: string;
   displayname: string;
 };
-
-// export type DashboardItem = {
-//   title: string;
-//   count: number;
-//   desc: string;
-// };
 
 export type Summary = {
   title: string;

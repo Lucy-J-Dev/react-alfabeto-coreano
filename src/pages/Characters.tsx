@@ -7,40 +7,17 @@ import CardTitle from "../components/card/CardTitle";
 import CardContent from "../components/card/CardContent";
 import { useEffect, useState } from "react";
 import { getCharacters } from "../services/api";
-
-type CharacterItem = {
-  id: string;
-  character: string;
-  type: string;
-  pronunciation: string;
-  characterRomaji: string;
-  name: string;
-  nameRomaji: string;
-  description: null;
-  imageUrl: string;
-};
-
-// Estados
-
-// const charactersData: CharacterItem[] = [
-//   { id: 1, char: "ㄱ", name: "Giyeok", type: "Consonant", desc: "Basic consonant" },
-//   { id: 2, char: "ㄴ", name: "Nieun", type: "Consonant", desc: "Basic consonant" },
-//   { id: 3, char: "ㄷ", name: "Digeut", type: "Consonant", desc: "Basic consonant" },
-//   { id: 4, char: "ㄹ", name: "Rieul", type: "Consonant", desc: "Basic consonant" },
-//   { id: 5, char: "ㅁ", name: "Mieum", type: "Consonant", desc: "Basic consonant" },
-//   { id: 6, char: "ㅂ", name: "Bieup", type: "Consonant", desc: "Basic consonant" },
-//   { id: 15, char: "ㅏ", name: "A", type: "Vowel", desc: "Basic vowel" },
-//   { id: 16, char: "ㅑ", name: "Ya", type: "Vowel", desc: "Basic vowel" },
-// ];
+import { CharacterItem } from "../utils/types";
 
 const Characters = () => {
+  // Estados
   const [characters, setCharacters] = useState<CharacterItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [messageError, setMessageError] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     const handleCallCharactersApi = async () => {
-      setLoading(true);
       try {
         const data = await getCharacters();
         setCharacters(data);
@@ -85,7 +62,7 @@ const Characters = () => {
 
       {/* Lista de caracteres */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6">
-        {charactersData.map((character) => (
+        {characters.map((character) => (
           <Link
             className="hover:scale-105 hover:bg-primary/50 transition-all duration-300 ease-initial"
             key={character.id}
@@ -93,12 +70,12 @@ const Characters = () => {
           >
             <Card>
               <CardHeader>
-                <CardTitle>{character.char}</CardTitle>
+                <CardTitle>{character.character}</CardTitle>
                 <span className="text-sm font-bold text-accent">{character.type}</span>
               </CardHeader>
               <CardContent>
                 <p className="font-semibold">{character.name}</p>
-                <p className="italic text-muted-foreground">{character.desc}</p>
+                <p className="italic text-muted-foreground">{character.pronunciation}</p>
               </CardContent>
             </Card>
           </Link>
