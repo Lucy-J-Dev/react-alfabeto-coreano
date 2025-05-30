@@ -5,24 +5,9 @@ import CardHeader from "../components/card/CardHeader";
 import CardTitle from "../components/card/CardTitle";
 import { useEffect, useState } from "react";
 import { getSummary } from "../services/api";
-
-type DashboardItem = {
-  title: string;
-  count: number;
-  desc: string;
-};
-
-type Summary = {
-  title: string;
-  summary: string;
-  content: Content[];
-};
-
-type Content = {
-  title: string;
-  count: number;
-  description: string;
-};
+import { Summary } from "../utils/types";
+// import { DashboardItem } from "../utils/types";
+import { Content } from "../utils/types";
 
 const Dashboard = () => {
   const [dataSummary, setDataSummary] = useState<Summary>({ title: "", summary: "", content: [] });
