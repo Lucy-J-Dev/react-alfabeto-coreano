@@ -7,23 +7,30 @@ import CardTitle from "../components/card/CardTitle";
 import CardContent from "../components/card/CardContent";
 
 type CharacterItem = {
-  id: number;
-  char: string;
-  name: string;
+  id: string;
+  character: string;
   type: string;
-  desc: string;
+  pronunciation: string;
+  characterRomaji: string;
+  name: string;
+  nameRomaji: string;
+  description: null;
+  imageUrl: string;
 };
 
-const charactersData: CharacterItem[] = [
-  { id: 1, char: "ㄱ", name: "Giyeok", type: "Consonant", desc: "Basic consonant" },
-  { id: 2, char: "ㄴ", name: "Nieun", type: "Consonant", desc: "Basic consonant" },
-  { id: 3, char: "ㄷ", name: "Digeut", type: "Consonant", desc: "Basic consonant" },
-  { id: 4, char: "ㄹ", name: "Rieul", type: "Consonant", desc: "Basic consonant" },
-  { id: 5, char: "ㅁ", name: "Mieum", type: "Consonant", desc: "Basic consonant" },
-  { id: 6, char: "ㅂ", name: "Bieup", type: "Consonant", desc: "Basic consonant" },
-  { id: 15, char: "ㅏ", name: "A", type: "Vowel", desc: "Basic vowel" },
-  { id: 16, char: "ㅑ", name: "Ya", type: "Vowel", desc: "Basic vowel" },
-];
+// Estados
+const [characters, setCharacters] = useState<CharacterItem[]>([]);
+
+// const charactersData: CharacterItem[] = [
+//   { id: 1, char: "ㄱ", name: "Giyeok", type: "Consonant", desc: "Basic consonant" },
+//   { id: 2, char: "ㄴ", name: "Nieun", type: "Consonant", desc: "Basic consonant" },
+//   { id: 3, char: "ㄷ", name: "Digeut", type: "Consonant", desc: "Basic consonant" },
+//   { id: 4, char: "ㄹ", name: "Rieul", type: "Consonant", desc: "Basic consonant" },
+//   { id: 5, char: "ㅁ", name: "Mieum", type: "Consonant", desc: "Basic consonant" },
+//   { id: 6, char: "ㅂ", name: "Bieup", type: "Consonant", desc: "Basic consonant" },
+//   { id: 15, char: "ㅏ", name: "A", type: "Vowel", desc: "Basic vowel" },
+//   { id: 16, char: "ㅑ", name: "Ya", type: "Vowel", desc: "Basic vowel" },
+// ];
 
 const Characters = () => {
   return (
