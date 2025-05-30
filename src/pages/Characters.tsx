@@ -5,6 +5,8 @@ import Card from "../components/card/Card";
 import CardHeader from "../components/card/CardHeader";
 import CardTitle from "../components/card/CardTitle";
 import CardContent from "../components/card/CardContent";
+import { useEffect, useState } from "react";
+import { getCharacters } from "../services/api";
 
 type CharacterItem = {
   id: string;
@@ -19,7 +21,6 @@ type CharacterItem = {
 };
 
 // Estados
-const [characters, setCharacters] = useState<CharacterItem[]>([]);
 
 // const charactersData: CharacterItem[] = [
 //   { id: 1, char: "ㄱ", name: "Giyeok", type: "Consonant", desc: "Basic consonant" },
@@ -33,6 +34,25 @@ const [characters, setCharacters] = useState<CharacterItem[]>([]);
 // ];
 
 const Characters = () => {
+  const [characters, setCharacters] = useState<CharacterItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [messageError, setMessageError] = useState("");
+
+  useEffect(() => {
+    const handleCallCharactersApi = async () => {
+      setLoading(true);
+      try {
+        const data = await getCharacters();
+        setCharacters(data);
+      } catch (error) {
+        setMessageError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    handleCallCharactersApi();
+  }, []);
+
   return (
     <div className="bg-background flex flex-col gap-6 py-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
       {/* Encabezado */}
