@@ -31,7 +31,9 @@ const AddCharacter = () => {
         setCharacterTypes(data);
         console.log(data);
       } catch (error) {
-        setMessageError(error.message);
+        if (error instanceof Error) {
+          setMessageError(error.message);
+        }
       } finally {
         setLoading(false);
       }
