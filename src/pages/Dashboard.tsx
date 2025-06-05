@@ -20,7 +20,9 @@ const Dashboard = () => {
         setDataSummary(data);
         console.log(data);
       } catch (error) {
-        setMessageError(error.message);
+        if (error instanceof Error) {
+          setMessageError(error.message);
+        }
       } finally {
         setLoading(false);
       }
@@ -30,6 +32,7 @@ const Dashboard = () => {
 
   return (
     <div className="bg-white flex flex-col gap-6 rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300">
+      {messageError && <p>{messageError}</p>}
       {loading ? (
         <p>Cargando</p>
       ) : (

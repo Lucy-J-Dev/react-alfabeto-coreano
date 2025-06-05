@@ -22,7 +22,9 @@ const Characters = () => {
         const data = await getCharacters();
         setCharacters(data);
       } catch (error) {
-        setMessageError(error.message);
+        if (error instanceof Error) {
+          setMessageError(error.message);
+        }
       } finally {
         setLoading(false);
       }
@@ -62,24 +64,29 @@ const Characters = () => {
 
       {/* Lista de caracteres */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-6">
-        {characters.map((character) => (
-          <Link
-            className="hover:scale-105 hover:bg-primary/50 transition-all duration-300 ease-initial"
-            key={character.id}
-            to={`/caracteres/${character.id}`}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle>{character.character}</CardTitle>
-                <span className="text-sm font-bold text-accent">{character.type}</span>
-              </CardHeader>
-              <CardContent>
-                <p className="font-semibold">{character.name}</p>
-                <p className="italic text-muted-foreground">{character.pronunciation}</p>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+        {messageError && <p>{messageError}</p>}
+        {loading ? (
+          <p>Cargando...</p>
+        ) : (
+          characters.map((character) => (
+            <Link
+              className="hover:scale-105 hover:bg-primary/50 transition-all duration-300 ease-initial"
+              key={character.id}
+              to={`/caracteres/${character.id}`}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle>{character.character}</CardTitle>
+                  <span className="text-sm font-bold text-accent">{character.type}</span>
+                </CardHeader>
+                <CardContent>
+                  <p className="font-semibold">{character.name}</p>
+                  <p className="italic text-muted-foreground">{character.pronunciation}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))
+        )}
       </div>
     </div>
   );

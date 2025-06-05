@@ -1,8 +1,10 @@
 import { CharacterForm } from "../utils/types";
 
+const URL = "https://hangul-api-lucy-j-dev.azurewebsites.net"; // TODO: Recuperar informacion desde variables de entorno
+
 export const createCharacter = async (formData: CharacterForm) => {
   try {
-    const response = await fetch("https://hangul-api-lucy-j-dev.azurewebsites.net/api/v1/jamos", {
+    const response = await fetch(`${URL}/api/v1/jamos`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -16,13 +18,14 @@ export const createCharacter = async (formData: CharacterForm) => {
       }),
     });
     const result = await response.json();
-    console.log("Api: ", result);
     if (!response.ok) {
       let errorMessage = "";
 
-      Object.entries(result.errors).forEach(([field, message]) => {
-        message.forEach((msg) => {
-          errorMessage = errorMessage + " " + msg;
+      const errors = result.errors as Record<string, string[]>;
+
+      Object.entries(errors).forEach(([, message]) => {
+        message.forEach((msg: string) => {
+          errorMessage += ` ${msg}`;
         });
       });
       throw new Error(errorMessage || `Error ${response.status}: ${response.statusText}`);
@@ -36,39 +39,45 @@ export const createCharacter = async (formData: CharacterForm) => {
 
 export const getCharacterTypes = async () => {
   try {
-    const response = await fetch("https://hangul-api-lucy-j-dev.azurewebsites.net/api/v1/general/types");
+    const response = await fetch(`${URL}/api/v1/general/types`);
     const result = await response.json();
     if (!response.ok) {
       throw new Error("");
     }
     return result;
   } catch (error) {
-    throw new Error("No fue posible obtener los tipos");
+    if (error instanceof Error) {
+      throw new Error("No fue posible obtener los tipos");
+    }
   }
 };
 
 export const getSummary = async () => {
   try {
-    const response = await fetch("https://hangul-api-lucy-j-dev.azurewebsites.net/api/v1/general/summary");
+    const response = await fetch(`${URL}/api/v1/general/summary`);
     const result = await response.json();
     if (!response.ok) {
       throw new Error("");
     }
     return result;
   } catch (error) {
-    throw new Error("No fue posible obtener resumenes");
+    if (error instanceof Error) {
+      throw new Error("No fue posible obtener resumenes");
+    }
   }
 };
 
 export const getCharacters = async () => {
   try {
-    const response = await fetch("https://hangul-api-lucy-j-dev.azurewebsites.net/api/v1/jamos");
+    const response = await fetch(`${URL}/api/v1/jamos`);
     const result = await response.json();
     if (!response.ok) {
       throw new Error("");
     }
     return result;
   } catch (error) {
-    throw new Error("No fue posible obtener los caracteres");
+    if (error instanceof Error) {
+      throw new Error("No fue posible obtener los caracteres");
+    }
   }
 };

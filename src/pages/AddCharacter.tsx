@@ -74,8 +74,9 @@ const AddCharacter = () => {
       setMessage(`Su caracter ${formData.char} fue creado con el id: ${response.id}`);
       setFormData(characterInitialValue);
     } catch (error) {
-      console.log(error);
-      setMessageError(`Su caracter no fue creado ${error.message}`);
+      if (error instanceof Error) {
+        setMessageError(`Su caracter no fue creado ${error.message}`);
+      }
     } finally {
       setLoading(false);
     }
